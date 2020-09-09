@@ -45,6 +45,7 @@ private:
   CommandLimit speed_limit_;
   CommandLimit position_limit_;
   CommandLimit servo_limit_;
+  bool keep_alive_;  // when true driver keeps last speed
 
   // ROS services
   ros::Publisher state_pub_;

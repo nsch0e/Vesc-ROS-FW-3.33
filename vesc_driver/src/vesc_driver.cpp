@@ -31,6 +31,12 @@ VescDriver::VescDriver(ros::NodeHandle nh,
     return;
   }
 
+  if(!private_nh.getParam("keep_alive", keep_alive_)){
+    keep_alive_ = false;
+    ROS_WARN("keep_alive parameter not set. defaulting to false!");
+  }
+ 
+
   // attempt to connect to the serial port
   try {
     vesc_.connect(port);
@@ -132,7 +138,9 @@ void VescDriver::timerCallback(const ros::TimerEvent& event)
   else if (driver_mode_ == MODE_OPERATING) {
     // poll for vesc state (telemetry)
     vesc_.requestState();
-    vesc_.setAlive();
+    if(keep_alive_){
+      vesc_.setAlive();
+    }
   }
   else {
     // unknown mode, how did that happen?

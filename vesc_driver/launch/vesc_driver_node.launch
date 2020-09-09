@@ -14,6 +14,7 @@
   <!-- Parameter for enabling rotor position publishing
        Possible values are "inductance", "observer", "encoder", "pid_pos", "pid_pos_error", "encoder_observer_error" -->
   <arg name="rotor_position_source" default="encoder" />
+  <arg name="keep_alive" default="true" />
 
   <!-- VESC driver node -->
   <node pkg="vesc_driver" type="vesc_driver_node" name="$(arg node_name)"
@@ -22,6 +23,7 @@
      <param name="tacho_pulses_per_revolution" value="120" />
       <param name="motor_poles" value="20" />
     <param name="rotor_position_source" value="$(arg rotor_position_source)" />
+    <param name="keep_alive" value="$(arg keep_alive)" />
   </node>
 
 </launch>
